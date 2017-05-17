@@ -107,7 +107,7 @@ export default class AppContainer extends Component {
     axios.get(`/api/artists/${ artistId }`)
       .then(res => res.data)
       .then(artist => this.setState({
-        selectArtist: artist
+        selectedArtist: artist
         })
       )
       .catch(console.error.bind(console));
@@ -135,7 +135,7 @@ export default class AppContainer extends Component {
                 albums: this.state.albums,
                 selectAlbum: this.selectAlbum,
                 artists: this.state.artists,
-                selectArtist: this.state.selectArtist
+                selectedArtist: this.state.selectedArtist
               })
               : null
           }
