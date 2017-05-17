@@ -9,6 +9,10 @@ export const convertAlbum = (album) => {
   return album;
 };
 
+export const convertArtist = (artist) => {
+  artist.imageUrl = `/api/artists/${artist.id}`;
+}
+
 export const convertAlbums = (albums) =>
   albums.map(album => convertAlbum(album));
 

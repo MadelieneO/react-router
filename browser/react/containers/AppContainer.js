@@ -9,7 +9,7 @@ import Album from '../components/Album';
 import Sidebar from '../components/Sidebar';
 import Player from '../components/Player';
 
-import { convertAlbum, convertAlbums, skip } from '../utils';
+import { convertAlbum, convertAlbums, skip, convertArtist } from '../utils';
 
 export default class AppContainer extends Component {
 
@@ -28,7 +28,11 @@ export default class AppContainer extends Component {
   componentDidMount () {
     axios.get('/api/albums/')
       .then(res => res.data)
-      .then(album => this.onLoad(convertAlbums(album)));
+      .then(albums => this.onLoad(convertAlbums(albums)));
+
+    axios.get('/api/artists/')
+      .then(res => res.data)
+      .then(artists => this.setState({ artists }));
 
     AUDIO.addEventListener('ended', () =>
       this.next());
@@ -99,6 +103,16 @@ export default class AppContainer extends Component {
       .catch(console.error.bind(console));
   }
 
+  selectArtist (artistId) {
+    axios.get(`/api/artists/${ artistId }`)
+      .then(res => res.data)
+      .then(artist => this.setState({
+        selectArtist: artist
+        })
+      )
+      .catch(console.error.bind(console));
+  }
+
   deselectAlbum () {
     this.setState({ selectedAlbum: {}});
   }
@@ -120,6 +134,8 @@ export default class AppContainer extends Component {
 
                 albums: this.state.albums,
                 selectAlbum: this.selectAlbum,
+                artists: this.state.artists,
+                selectArtist: this.state.selectArtist
               })
               : null
           }
