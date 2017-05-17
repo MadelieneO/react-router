@@ -1,1 +1,15 @@
+<<<<<<< HEAD
 node_modules
+=======
+.idea
+node_modules
+npm-debug.log
+.DS_Store
+coverage
+**.mp3
+**.m4a
+**.mp4
+server/audio/
+public/bundle.js
+public/bundle.js.map
+>>>>>>> 40ad8c784ad4ae0cf19caad1595145aecbc50e76
